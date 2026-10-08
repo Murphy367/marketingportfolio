@@ -509,6 +509,73 @@ section{padding-block:clamp(80px,10vw,150px)}
   html{scroll-behavior:auto}
   .rv.wait{transform:none;opacity:1}
 }
+
+/* ===== readability pass: larger type, steadier display face, calmer work grid ===== */
+body{font-size:17px;line-height:1.6}
+.mono{font-size:12.5px;letter-spacing:.045em}
+.name{font-weight:420;font-variation-settings:"SOFT" 0,"WONK" 0;letter-spacing:-.035em}
+.sec-head h2,.ov-head h2,.contact h2,.next-proj h3,.off-head h3{font-weight:420}
+.ctext h3,.card .cap h3,.row h3,.pal h3,.panel .about h3,.oc h4,.mind-card h4,.pnl h4{font-weight:430}
+em{font-variation-settings:"SOFT" 0,"WONK" 0}
+.statement{font-size:clamp(19px,1.8vw,24px)}
+.sec-head .lede,.ov-head .tag{font-size:18px;line-height:1.55}
+nav.main a{font-size:15px}
+.brand{font-size:22px}
+.chip,.viewtoggle button,.seg button,.lang button{font-size:12.5px;padding:8px 14px}
+.ledger b{font-size:clamp(34px,4vw,56px)}
+/* work grid: two even columns, no staggering */
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(20px,3vw,44px);row-gap:clamp(48px,5vw,72px)}
+.card,.card.w7,.card.w5,.card.w5.up{grid-column:auto!important;padding-top:0!important}
+.card .frame{aspect-ratio:16/10}
+.card .cap{grid-template-columns:auto minmax(0,1fr);margin-top:18px}
+.card .cap > span.mono:last-child{display:none}
+.card .cap h3{font-size:clamp(28px,2.8vw,40px)}
+.card .sub{margin-top:8px}
+.card .sub p{font-size:16.5px;color:var(--mute);max-width:none}
+.card .sub span.mono{display:none}
+.tcover .big{font-weight:420}
+.tcover .big small{font-size:.2em;font-style:normal;font-family:var(--body);font-weight:400;letter-spacing:0}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.row h3{font-size:clamp(26px,3.2vw,44px)}
+/* story */
+.ctext > p{font-size:17px;line-height:1.65}
+.brief b{font-size:16px}
+.rail button{font-size:14.5px}
+.rail button span:first-child{font-size:12px}
+.cboards figcaption{font-size:12px}
+.w-label{font-size:12px}
+.w-tabs .tb button,.w-switch button,.cities button{font-size:15.5px}
+.w-tabs .pn b{font-size:23px}
+.w-tabs .pn p,.w-switch button small{font-size:16px}
+.w-dec .op button{font-size:16px;padding:13px 14px}
+.w-dec .op .n,.w-dec .op .t{font-size:12px}
+.w-dec .pc{font-size:15.5px}
+.w-dec .pc b{font-size:11.5px}
+.dec-why p{font-size:16.5px}
+.w-stat .sr b{font-size:17px}
+.w-stat .sr span.mute{font-size:15px}
+.flip{height:190px}
+.flip .f b{font-size:28px}
+.flip .b{font-size:15.5px}
+.figs b{font-weight:420}
+/* lab, me, about */
+.chart text{font-size:12.5px}
+.map-pt text{font-size:13.5px!important}
+.strat button b{font-size:15.5px}
+.strat button span{font-size:13.5px}
+.journey button b{font-size:16px}
+.journey-note,.panel .about > p{font-size:16.5px}
+.mm-node .lbl{font-size:17px}
+.mind-card p,.oc p{font-size:16.5px}
+.stk{font-size:15.5px}
+.stk.m{font-size:12.5px}
+.stk.d{font-size:18px}
+.cv dt b{font-size:17px}
+.cv dt span{font-size:15.5px}
+.cv dd{font-size:12.5px}
+.pills span{font-size:15px}
+.bio{font-weight:400}
+.tl-detail b{font-size:24px}
 </style>
 </head>
 <body>
@@ -576,7 +643,7 @@ section{padding-block:clamp(80px,10vw,150px)}
     <div class="sec-head rv">
       <div class="kicker mono mute">Selected work, 2024–2026</div>
       <h2>Briefs, <em>launches</em> &amp; research</h2>
-      <p class="lede">Internship work and the strongest marketing projects from my FIT and USC coursework. Open any project and step through it chapter by chapter: switch boards, flip cards, test the data and make your own call.</p>
+      <p class="lede">Internship work and the strongest marketing projects from my FIT and USC coursework. Open any project and step through it chapter by chapter: switch boards, flip cards, compare options and test the data.</p>
     </div>
     <div class="controls">
       <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
