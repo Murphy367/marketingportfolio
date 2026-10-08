@@ -87,7 +87,7 @@ nav.main a:hover::after,nav.main a.active::after,.ul:hover::after{transform:scal
 .hero-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid var(--line);padding-bottom:14px}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end;margin-top:clamp(28px,5vw,60px)}
 .name{font-family:var(--display);font-size:clamp(66px,13.5vw,214px);line-height:.86;letter-spacing:-.04em;font-weight:340;font-variation-settings:"SOFT" 100,"WONK" 1}
-.name .line{display:block;overflow:hidden;padding-bottom:.24em;margin-bottom:-.17em}
+.name .line{display:block;overflow:hidden;padding-bottom:.32em;margin-bottom:-.25em}
 .name .line span{display:inline-block;animation:rise 1.2s var(--ease) .1s backwards}
 .name .line:nth-child(2) span{animation-delay:.22s}
 .name em{color:var(--accent);padding-left:.5em}
@@ -249,6 +249,28 @@ section{padding-block:clamp(80px,10vw,150px)}
 @media (max-width:900px){.chap{grid-template-columns:1fr}.chap.rev .ctext{order:0}.ctext{position:static}}
 
 /* widgets */
+.w-dec .opts{display:grid;gap:6px}
+.w-dec .op{border:1px solid var(--line);border-radius:6px;transition:border-color .3s,background .3s}
+.w-dec .op.pick{border-color:var(--accent);background:var(--accent-soft)}
+.w-dec .op button{width:100%;display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:8px;text-align:left;padding:11px 12px;font-size:14px;align-items:baseline}
+.w-dec .op .n{color:var(--mute);font-size:10.5px}
+.w-dec .op .t{color:var(--accent);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+.w-dec .pc{display:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 12px 12px 46px;font-size:13.5px;color:var(--mute)}
+.w-dec .op.open .pc{display:grid}
+.w-dec .pc b{display:block;font-size:10px;letter-spacing:.06em;color:var(--ink);font-weight:500;margin-bottom:2px}
+.dec-why{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;border-top:1px solid var(--line);padding-top:12px}
+.dec-why p{font-size:14.5px;margin-top:4px}
+.w-stat{gap:10px}
+.w-stat .sr{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.5fr) 48px;gap:12px;align-items:center;padding-block:8px;border-bottom:1px solid var(--line)}
+.w-stat .sr b{display:block;font-weight:500}
+.w-stat .sr span.mute{font-size:13px}
+.w-stat .bar{height:10px;background:var(--line)}
+.w-stat .bar i{display:block;height:100%;background:var(--mute);opacity:.6}
+.w-stat .sr.hi .bar i{background:var(--accent);opacity:1}
+.w-stat .v{font-family:var(--display);font-size:24px;text-align:right;font-variant-numeric:tabular-nums lining-nums}
+.w-stat .sr.hi .v{color:var(--accent)}
+@media (max-width:600px){.w-dec .pc,.dec-why{grid-template-columns:1fr}.w-dec .pc{padding-left:12px}}
+
 .w{display:grid;gap:12px;min-width:0}
 .w-label{display:flex;gap:8px;align-items:center;color:var(--accent)}
 .w-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
@@ -369,6 +391,72 @@ section{padding-block:clamp(80px,10vw,150px)}
 .journey-note{margin-top:16px;max-width:66ch}
 @media (max-width:860px){.panel{grid-template-columns:1fr}.journey{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
+/* stickers (hero personality, draggable) */
+.hero{position:relative}
+.stickers{position:absolute;inset:0;pointer-events:none;z-index:5}
+.stk{position:absolute;pointer-events:auto;touch-action:none;cursor:grab;user-select:none;padding:9px 14px;border-radius:40px;font-size:14px;line-height:1.1;white-space:nowrap;box-shadow:0 10px 24px -14px rgba(0,0,0,.45);transition:box-shadow .3s,scale .3s;rotate:var(--r,0deg)}
+.stk:active{cursor:grabbing;scale:1.06;box-shadow:0 18px 30px -14px rgba(0,0,0,.5)}
+.stk.a{background:var(--accent);color:var(--accent-ink)}
+.stk.b{background:var(--ink);color:var(--paper)}
+.stk.c{background:var(--paper);color:var(--ink);border:1px solid var(--ink)}
+.stk.d{background:var(--surface);color:var(--ink);font-family:var(--display);font-style:italic;font-size:17px}
+.stk.m{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.stk-hint{position:absolute;right:var(--gutter);top:calc(150px + env(safe-area-inset-top,0px));pointer-events:none;color:var(--mute)}
+.lang{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:30px;padding:3px;margin-top:22px}
+.lang button{font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:5px 12px;border-radius:30px}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.statement[lang="zh"]{font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",var(--body);letter-spacing:.02em}
+@media (max-width:860px){
+  .stickers{position:static;display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;pointer-events:auto}
+  .stk{position:static;rotate:0deg;cursor:default;font-size:13px;padding:7px 12px}
+  .stk-hint{display:none}
+}
+
+/* mind map */
+.mind{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:clamp(20px,3vw,48px);align-items:center}
+.mind-map{min-width:0}
+.mind-map svg{width:100%;height:auto;display:block;overflow:visible}
+.mm-node{cursor:pointer}
+.mm-node .lbl{font-family:var(--body);font-weight:600;font-size:15px;fill:var(--ink);letter-spacing:-.01em;transition:fill .3s}
+.mm-node .dot{fill:var(--paper);stroke:var(--ink);stroke-width:1.5;transition:fill .3s,r .3s}
+.mm-node:hover .lbl,.mm-node.on .lbl{fill:var(--accent)}
+.mm-node:hover .dot,.mm-node.on .dot{fill:var(--accent);stroke:var(--accent)}
+.mm-branch{transition:opacity .4s}
+.mm-branch.dim{opacity:.35}
+.mm-hub{font-family:var(--display);font-style:italic;font-size:30px;fill:var(--accent-ink)}
+.mm-side{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;fill:var(--mute)}
+.mind-card{border:1px solid var(--line);padding:clamp(18px,2vw,26px);display:grid;gap:12px;min-height:250px;align-content:start;background:var(--paper)}
+.mind-card .k{color:var(--accent)}
+.mind-card h4{font-family:var(--display);font-weight:360;font-size:clamp(28px,2.6vw,38px);line-height:1;letter-spacing:-.02em}
+.mind-card p{color:var(--mute)}
+.mind-card .go{justify-self:start;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--ink);border-radius:30px;padding:8px 14px;transition:background .3s,color .3s}
+.mind-card .go:hover{background:var(--ink);color:var(--paper)}
+.fw{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:28px}
+.pillx{border:1px solid var(--line);border-radius:30px;padding:5px 10px;color:var(--ink)}
+@media (max-width:900px){.mind{grid-template-columns:1fr}.mind-map{overflow-x:auto}.mind-map svg{min-width:640px}}
+
+/* off the clock */
+.off{margin-top:clamp(64px,8vw,120px)}
+.off-head h3{font-family:var(--display);font-weight:340;font-size:clamp(34px,4.4vw,64px);line-height:.95;letter-spacing:-.03em;margin-bottom:clamp(24px,3vw,40px)}
+.off-head h3 em{color:var(--accent)}
+.off-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,22px)}
+.oc{border-top:2px solid var(--ink);padding-top:16px;display:grid;gap:12px;align-content:start;min-width:0}
+.oc h4{font-family:var(--display);font-weight:360;font-size:clamp(26px,2.4vw,34px);line-height:1;letter-spacing:-.02em}
+.oc h4 em{color:var(--accent)}
+.oc p{color:var(--mute);font-size:14.5px}
+.ocb{justify-self:start;border:1px solid var(--ink);border-radius:30px;padding:8px 14px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;transition:background .3s,color .3s}
+.ocb:hover{background:var(--ink);color:var(--paper)}
+.golf{width:100%;height:auto;display:block}
+.golf .ball{transition:none}
+.hook{display:grid;gap:8px}
+.hk-bar{height:46px;background:var(--surface);position:relative;overflow:hidden}
+.hk-bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--accent)}
+.hk-row{display:flex;justify-content:space-between;gap:10px}
+.cities{display:flex;flex-wrap:wrap;gap:6px}
+.cities button{border:1px solid var(--line);border-radius:30px;padding:7px 12px;font-size:13.5px;transition:background .3s,color .3s,border-color .3s}
+.cities button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+@media (max-width:860px){.off-grid{grid-template-columns:1fr}}
+
 /* palettes */
 .pal{border-top:1px solid var(--line);padding-block:26px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.4fr);gap:clamp(20px,3vw,48px);align-items:center}
 .pal h3{font-family:var(--display);font-weight:360;font-size:clamp(26px,2.6vw,38px);line-height:1;letter-spacing:-.02em}
@@ -434,6 +522,7 @@ section{padding-block:clamp(80px,10vw,150px)}
     <a href="#home" class="brand">Murphy <i>Tang</i></a>
     <nav class="main" aria-label="Sections">
       <a href="#work">Work</a>
+      <a href="#me">Me</a>
       <a href="#lab">Insight Lab</a>
       <a href="#color">Color</a>
       <a href="#about">About</a>
@@ -464,12 +553,15 @@ section{padding-block:clamp(80px,10vw,150px)}
             <span class="on">content that grows.</span><span>a launch calendar.</span><span>a brand position.</span><span>a crisis playbook.</span><span>a season's story.</span>
           </span>
         </p>
+        <div class="lang" id="lang" role="group" aria-label="Language"><button data-l="en" aria-pressed="true">EN</button><button data-l="zh" aria-pressed="false">中文</button></div>
       </div>
       <div>
         <div class="deck" id="deck" data-cursor="Shuffle" role="button" tabindex="0" aria-label="Shuffle featured boards"></div>
         <div class="deck-hint mono mute"><span id="deckCap">Featured boards</span><span>Click to shuffle</span></div>
       </div>
     </div>
+    <div class="stickers" id="stickers" aria-label="A few things about me"></div>
+    <span class="stk-hint mono">Drag the stickers</span>
     <div class="ledger">
       <div><span class="mono mute">Instagram followers, MoM · House of NightFly</span><b>70<sup>%</sup></b></div>
       <div><span class="mono mute">Views from 5 U.S. KOL partners</span><b>10K<sup>+</sup></b></div>
@@ -496,6 +588,51 @@ section{padding-block:clamp(80px,10vw,150px)}
     <div id="workWrap">
       <div class="grid" id="grid"></div>
       <div class="list" id="list"></div>
+    </div>
+  </section>
+
+  <section id="me" class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker mono mute">The person behind the briefs</div>
+      <h2>How I <em>think</em></h2>
+      <p class="lede">I plan in radial maps, not lists. This is my real process: the left side finds the problem, the right side solves it. Tap any node to see where it shows up in my work.</p>
+    </div>
+    <div class="mind">
+      <div class="mind-map" id="mindMap"></div>
+      <aside class="mind-card" id="mindCard" aria-live="polite"></aside>
+    </div>
+    <div class="fw mono mute"><span>Frameworks I reach for</span><span class="pillx">SWOT</span><span class="pillx">Porter's Five Forces</span><span class="pillx">4Ps</span><span class="pillx">PESTEL</span><span class="pillx">Perceptual mapping</span></div>
+
+    <div class="off">
+      <div class="off-head"><div class="kicker mono mute">Off the clock</div><h3>Three things that <em>aren't</em> on my résumé</h3></div>
+      <div class="off-grid">
+        <article class="oc" id="ocGolf">
+          <div class="mono mute">01 · Weekends</div>
+          <h4>I play <em>golf</em></h4>
+          <p>On weekends I'm on the course. In 2025 I also worked the LPGA Tour in New York, as the on-site link between staff, players and spectators.</p>
+          <svg viewBox="0 0 300 120" class="golf" role="img" aria-label="A golf hole: tee, fairway and flag">
+            <path d="M10,100 C80,60 170,110 290,70" fill="none" stroke="var(--line)" stroke-width="22" stroke-linecap="round"/>
+            <circle cx="268" cy="74" r="12" fill="var(--accent-soft)"/>
+            <line x1="268" y1="74" x2="268" y2="30" stroke="var(--ink)" stroke-width="1.5"/>
+            <path d="M268,30 L290,37 L268,44 Z" fill="var(--accent)"/>
+            <circle class="ball" cx="22" cy="96" r="5" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.2"/>
+          </svg>
+          <button class="ocb mono" id="teeOff">Tee off →</button>
+        </article>
+        <article class="oc" id="ocHook">
+          <div class="mono mute">02 · Content</div>
+          <h4>Single take, <em>no edits</em></h4>
+          <p>I make short videos in one take, with no cuts and a hook in the first three seconds. Right now that means book videos for Mark, an AI bookmark brand.</p>
+          <div class="hook"><div class="hk-bar"><i id="hkFill"></i></div><div class="hk-row mono"><span id="hkTime">0.0s</span><span id="hkMsg" class="mute">The hook has 3 seconds.</span></div></div>
+          <button class="ocb mono" id="hkPlay">Play 3 seconds ▶</button>
+        </article>
+        <article class="oc" id="ocCities">
+          <div class="mono mute">03 · Four cities</div>
+          <h4>Hangzhou → <em>LA</em></h4>
+          <div class="cities" id="cities"></div>
+          <p id="cityNote" class="mute"></p>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -673,7 +810,7 @@ const PROJECTS = [
           ['03 Amplify','KOLs & retail','I lined up 5 U.S.-based KOL partnerships and supported collaboration talks with Macy\'s and Nordstrom.'],
           ['04 Measure','What moved','Instagram followers grew 70% month over month, overseas traffic rose 10%, and KOL content passed 10,000 views.']]} },
       { t:'Brand Book &amp; <em>Look Book</em>', p:'I turned Fashion Future and WGSN research into the brand\'s Brand Book and Look Book, laid out in Illustrator and InDesign. That gave retail buyers and creators one consistent story about the brand during the U.S. expansion.',
-        w:{type:'quiz', q:'Which source fed the Brand Book\'s trend story?', opts:['Fashion Future and WGSN reports','Only the brand\'s own sales data','Competitor price lists'], pick:0, why:'Trend services gave the season\'s direction. Meltwater and search data told me how our own audience reacted to it.'} },
+        w:{type:'none'} },
       { t:'The same loop, <em>three more</em> times', p:'The same habit of listening, shaping and measuring carried into my other roles. Pick a company.',
         w:{type:'tabs', label:'Pick a role', items:[
           ['Dayu Network','Marketing & Resource Integration · Hangzhou','Researched segmented user behavior and product performance to guide pricing, promotion and bundling across platforms. Multi-channel data analysis helped improve campaign targeting efficiency by 15%.'],
@@ -695,7 +832,7 @@ const PROJECTS = [
           ['Opportunities','Opportunities','Omnichannel shopping is growing, and so is demand for personal, meaningful accessories and wearable tech.'],
           ['Threats','Threats','LVMH, Richemont and Signet (Kay, Zales) compete for the same wrist, and the economy is uncertain.']]} },
       { t:'Who <em>she</em> is', b:[3,4], p:'A concentrated strategy: put the money where Pandora fans and Apple fans overlap.',
-        w:{type:'quiz', q:'Our persona changes her Watch band how often?', opts:['Rarely, she keeps the one it came with','To match her outfit','Only for workouts'], pick:1, why:'She is a 26-year-old art director in Brooklyn earning about $80,000, active on Instagram, Pinterest and TikTok, who swaps bands to fit her look. That habit is the opening for a charm-able band.'} },
+        w:{type:'tabs', label:'Tap to meet her', items:[['Who','26, art director, Brooklyn','Earns about $80,000, has a bachelor\'s degree, and owns an iPhone 15, Apple Watch Series 9 and MacBook Air.'],['Where she scrolls','Instagram, Pinterest, TikTok','Highly active, and into fashion, design, personalized accessories and fitness classes like Pilates and spin.'],['How she shops','Online, for meaning','Prefers brands with emotional or aesthetic value and products that express her identity.'],['The habit','Swaps her Watch band','She changes bands to match her outfit. That habit is the opening for a charm-able band.']]} },
       { t:'Where to <em>play</em>', b:[5], p:'Pandora sits in the mass, lower-price corner. The Watch band pushes it toward "value luxury" without fighting Cartier or Tiffany head-on.',
         w:{type:'map'} },
       { t:'"Spring into the <em>Future</em>"', sw:[['Mood board',6,'Pandora charms meet Apple\'s product language.'],['Color story',7,'Pandora Pink and Apple Chrome, with iPod Nano Blue, Solar Flare, Cosmic Blush and Techno Tangerine.'],['Product line',8,'Charm-link, bangle and silicone bands in silver, gold and rose gold.']], p:'Switch between the boards. Hover the swatches to read the color names.',
@@ -742,8 +879,8 @@ const PROJECTS = [
       <text x="300" y="41" text-anchor="middle" style="fill:var(--ink);font-family:var(--body);font-size:13px;letter-spacing:0">Product function vs. values</text>
       <line x1="300" y1="50" x2="300" y2="101" stroke="var(--accent)" stroke-dasharray="3 2" marker-end="url(#ar)"/>
     </svg></div>`} },
-      { t:'Make a <em>guess</em> first', p:'A windbreaker is reported to lose warmth in the cold. The brand has four ways to answer. Before seeing the data, which one do you think shoppers forgave most?',
-        w:{type:'quiz', q:'Which response earned the most forgiveness?', opts:['A heartfelt apology','Facts and lab test data','Returns, a better fabric and new guidance','Saying nothing'], pick:2, why:'The corrective response scored 5.55 out of 7 on forgiveness in the product-function crisis. The apology alone scored 2.13, lower than saying nothing (2.75).'} },
+      { t:'The headline <em>finding</em>', p:'A windbreaker is reported to lose warmth in the cold. Here is how much shoppers forgave the brand under each response, on a 7-point scale.',
+        w:{type:'stat'} },
       { t:'Try every <em>response</em>', p:'Now switch the crisis type and response yourself. These are the real cell means from my experiment.', w:{type:'crisis'} },
       { t:'What it <em>means</em>', p:'Forgiveness is the mechanism. A response changes how willing people are to forgive, and forgiveness predicts whether they avoid the brand (β = −0.81, adjusted R² = .66). Facts and fixes matter most in product-function crises. In a values crisis, shoppers also judge whether the brand\'s stance is sincere.',
         w:{type:'tabs', label:'Tap a method', items:[
@@ -784,22 +921,22 @@ const PROJECTS = [
       { t:'A cause with <em>a number</em>', b:[21,22], p:'Wakaka partners with the Wildlife Conservation Society. For every piece sold from the collaboration, 5% of profits go to WCS. Drag the slider to see what that means.',
         w:{type:'calc'} } ] },
 
-  { id:'cases', no:'05', title:'Brand Turnarounds', titleHtml:'Brand <em>Turnarounds</em>', tag:'Five brands in trouble. Pick your fix, then see mine.',
+  { id:'cases', no:'05', title:'Brand Turnarounds', titleHtml:'Brand <em>Turnarounds</em>', tag:'Five brands in trouble, three options each, one recommendation.',
     cat:'strategy', catLabel:'Brand Strategy', course:'FM205', courseName:'Fashion Marketing & Digital Technology', season:'2025', term:'Spring 2025', team:'Solo',
-    cover:{big:'5', small:'brands in trouble. Pick your fix, then see mine.', cls:'alt3'},
+    cover:{big:'5', small:'brands in trouble, 15 options weighed, 5 recommendations', cls:'alt3'},
     brief:[['Brands','Neiman Marcus, Uniqlo, Victoria\'s Secret, Alexander Wang, a vegan label'],['Frameworks','4Ps, SWOT, PESTEL, perceptual map, identity prism, communications model'],['Output','Three options each, then one recommendation'],['Thread','The crisis cases led to my thesis question']],
     figs:[['5','Cases'],['6','Frameworks'],['15','Options weighed'],['2','Crisis cases']],
     chapters:[
       { t:'Neiman <em>Marcus</em>', p:'A luxury department store whose strategy appealed to Baby Boomers, while post-recession Millennials wanted value and shopped online. Loyalty and store appeal were falling. <b>Frameworks:</b> promotion mix and the value equation.',
-        w:{type:'quiz', q:'What would you do?', opts:['Re-edit brands and widen the price range with quality affordable luxury','Redesign the stores to feel current','Add a clearance and discount area'], pick:0, why:'It had the best chance of raising profit and moving the strategy toward the new customer. I would measure sales, customer count and profit short term, and market share long term.'} },
+        w:{type:'decision', opts:[['Re-edit brands and widen the price range with quality affordable luxury','Brings in more Millennial shoppers','Could blur its high-end department store position'],['Redesign stores to feel current','A modern store draws interest','Costly, and no proof a new look changes spending'],['Add a clearance and discount area','More Millennials come through the door','They may shop only the discounts']], pick:0, why:'It has the best chance of raising profit and moves the strategy toward the new customer.', measure:'Sales, customer count and profit in the short term; market share in the long term.'} },
       { t:'A vegan <em>label</em>', p:'An accessible vegan line sold in high-end stores faced more competitors, closed stores during the pandemic, and greenwashing accusations, with little proof of its claims. <b>Frameworks:</b> 4Ps and SWOT.',
-        w:{type:'quiz', q:'What would you do?', opts:['Focus on markets with many vegan customers','Prove sustainability with evidence and certification','Rebuild the supply chain to be fully vegan'], pick:1, why:'Proof strengthens its place in the vegan market and grows a loyal, stable customer base over time.'} },
+        w:{type:'decision', opts:[['Focus on markets with many vegan customers','More efficient spend','The market may shrink and some customers drop off'],['Prove sustainability with evidence and certification','Builds a loyal customer base','Takes time and money, and slows expansion'],['Rebuild the supply chain to be fully vegan','Builds a loyal customer base','Costs rise and profit falls in the short term']], pick:1, why:'Proof answers the greenwashing charge directly and strengthens its place in the vegan market, so the loyal customer base grows and stays stable.', measure:'Growth in loyal customers and stable long-term revenue.'} },
       { t:'Uniqlo in <em>North America</em>', p:'Low brand awareness, too many stores opened then closed, and a weak showing in the suburbs, all while competing with H&M and Zara. <b>Frameworks:</b> PESTEL and perceptual mapping.',
-        w:{type:'quiz', q:'What would you do?', opts:['Develop products for local customers','Run social campaigns on Instagram and Facebook','Concentrate on dense urban areas'], pick:1, why:'Campaigns build awareness fastest and in a stable way, which is what a brand new to the market needs first.'} },
+        w:{type:'decision', opts:[['Develop products for local customers','Grows the local market','Costly and slow'],['Run social campaigns on Instagram and Facebook','Raises awareness and loyalty where the target customer already is','Needs research into what local shoppers like'],['Concentrate on dense urban areas','More precise targeting','Shrinks market penetration']], pick:1, why:'Campaigns build awareness fastest and most steadily, which is what a brand new to the market needs first.', measure:'Brand awareness and loyalty in North America.'} },
       { t:'Victoria\'s <em>Secret</em>', p:'Its image fell out of step with inclusive, self-defined femininity. Leadership controversies hurt it, and younger rivals took share. <b>Frameworks:</b> brand identity prism and perceptual map.',
-        w:{type:'quiz', q:'What would you do?', opts:['Launch an inclusive line for younger customers','Run a real-customer social review campaign','Reposition as inclusive with a wider size range'], pick:1, why:'Social media is where shoppers decide whether a brand meets their needs. A successful campaign can turn the image around quickly. I would track participation, review posts, profit from the campaign and growth in the target customer.'} },
+        w:{type:'decision', opts:[['Launch an inclusive line for younger customers','Younger shoppers get more relevant products','A long, costly timeline, and it may miss current customers'],['Run a real-customer social review campaign','Real reviews rebuild the image and signal change to the market','Can backfire if the products disappoint'],['Reposition as inclusive with a wider size range','A wider market and a repaired reputation','Risky and costly, and loyal customers may resist']], pick:1, why:'Social media is where shoppers decide whether a brand meets their needs. A successful campaign can turn the image around quickly and widen the target market.', measure:'Campaign participation, number of review posts and their feedback, campaign profit, and growth in the target customer.'} },
       { t:'Alexander <em>Wang</em>', p:'Allegations against the designer went unanswered, and the brand lost followers, trust and its social voice. <b>Frameworks:</b> communications model and crisis PR.',
-        w:{type:'quiz', q:'What would you do?', opts:['Reopen comments and address the accusations','Reposition with a #UsToo campaign','Train a PR team and publish an ethics code'], pick:2, why:'It costs more, but it protects the brand long term. A professional PR team and public ethics rules rebuild trust and keep the same crisis from repeating. I would measure followers, profit and loyal customers. This case is where my thesis question started.'} } ] },
+        w:{type:'decision', opts:[['Reopen comments and address the accusations','Could win back lost customers','Could make things worse'],['Reposition with a #UsToo campaign','Pivots the position and brings in new customers','Fails if the old problems stay unresolved'],['Train a PR team and publish an ethics code','Rebuilds the image and prepares for future crises','Costs more and takes time']], pick:2, why:'It costs more, but it protects the brand long term. A professional PR team and public ethics rules rebuild trust and keep the same crisis from repeating. This case is where my thesis question started.', measure:'Social media followers, profit and the number of loyal customers.'} } ] },
 
   { id:'eighties', no:'06', title:'Travel Back to the \'80s', titleHtml:'Back to the <em>\'80s</em>', tag:'A Fall 2025 forecast built on Stranger Things and Gen Z nostalgia.',
     cat:'forecast', catLabel:'Trend & Content', course:'FM245', courseName:'Fashion Forecasting', season:'FW25', term:'Fall 2024', team:'With Mingli Yao',
@@ -832,7 +969,7 @@ const PROJECTS = [
     coverIdx:2, cyc:[3,0,5],
     chapters:[
       { t:'Two signatures, <em>one</em> story', b:[0,1], p:'Bottega Veneta\'s intrecciato weave meets Puma\'s leaping cat. The image is a puma sprinting across an endless plain, and a New Yorker who moves the same way: tough outside, warm inside. The partnership with WWF gives the collab a reason beyond hype.',
-        w:{type:'quiz', q:'Why bring in WWF?', opts:['Only for a logo on the tag','To give the collaboration a sustainability purpose that both brands share','To lower production cost'], pick:1, why:'The collection uses premium, wrinkle-resistant fabrics and a responsible story. WWF\'s mission to protect nature makes the sustainability claim concrete.'} },
+        w:{type:'none'} },
       { t:'Building the <em>world</em>', sw:[['The city',2,'A mood board of New York at speed.'],['The Road',3,'Brakelight, Lamp, Moss, Concrete, Cloud and Cobalt.'],['Textiles',4,'Silk, cashmere, suede, leather and woven cottons.']], p:'Step from mood to color to fabric. Hover the swatches.',
         w:{type:'pal', c:[['Brakelight','#A13234'],['Lamp','#F6DF9B'],['Moss','#B4C1A9'],['Concrete','#C8C6CD'],['Cloud','#B3C9E6'],['Cobalt','#454D68']]} },
       { t:'The <em>collection</em>', sw:[['Rendered',5,'Nine pieces in low-saturation, cool lustrous tones.'],['Technical flats',6,'Tailored, streamlined silhouettes with elastic stripes and decorative trims.']], p:'Metallic minimalism meets athletic wear. Switch between the rendered looks and the flats.' } ] },
@@ -895,15 +1032,15 @@ addEventListener('scroll', () => {
   hdr.classList.toggle('hide', y > lastY && y > 400);
   lastY = y;
   let here = '';
-  ['work','lab','color','about','contact'].forEach(id => { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top < innerHeight*.4) here = id; });
+  ['work','me','lab','color','about','contact'].forEach(id => { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top < innerHeight*.4) here = id; });
   $$('nav.main a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+here));
 }, {passive:true});
 
 /* ---------- hero ---------- */
 (function rot(){
-  const items = $$('#rotator span'); let i = 0;
+  let i = 0;
   if (reduce) return;
-  setInterval(() => { const a = items[i]; i = (i+1) % items.length; const b = items[i];
+  setInterval(() => { const items = $$('#rotator span'); if (!items.length) return; i = i % items.length; const a = items[i]; i = (i+1) % items.length; const b = items[i];
     a.classList.remove('on'); a.classList.add('out'); b.classList.remove('out'); b.classList.add('on');
     setTimeout(() => a.classList.remove('out'), 800); }, 2400);
 })();
@@ -978,15 +1115,16 @@ W.tabs = (host, w) => {
   const pn = $('.pn', host), show = i => { const it = w.items[i]; pn.innerHTML = `<b>${it[1]}</b><p>${it[2]}</p>`; $$('.tb button', host).forEach(b => b.setAttribute('aria-pressed', +b.dataset.i === i)); };
   $('.tb', host).addEventListener('click', e => { const b = e.target.closest('button'); if (b) show(+b.dataset.i); }); show(0);
 };
-W.quiz = (host, w) => {
-  host.innerHTML = `<div class="w w-quiz"><span class="w-label mono">Your call</span><p class="q">${w.q}</p><div class="opts">${w.opts.map((o,i) => `<button data-i="${i}" class="${i===w.pick?'pick':''}"><span>${o}</span><span class="t"></span></button>`).join('')}</div><p class="why"></p><button class="mono ul again" hidden style="justify-self:start">Try again ↺</button></div>`;
-  const box = $('.w-quiz', host);
-  $('.opts', host).addEventListener('click', e => { const b = e.target.closest('button'); if (!b || box.classList.contains('done')) return;
-    const right = +b.dataset.i === w.pick; box.classList.add('done');
-    $$('.opts button', host).forEach(x => $('.t', x).textContent = +x.dataset.i === w.pick ? (right ? 'Same as mine ✓' : 'My pick') : (x === b ? 'Your pick' : ''));
-    $('.why', host).innerHTML = `<span class="score mono">${right ? 'We agree. ' : 'Here\'s my reasoning. '}</span>${w.why}`;
-    $('.again', host).hidden = false; });
-  $('.again', host).addEventListener('click', () => W.quiz(host, w));
+W.none = () => {};
+W.decision = (host, w) => {
+  host.innerHTML = `<div class="w w-dec"><span class="w-label mono">Options I weighed · tap to compare</span><div class="opts">${w.opts.map(([t,pro,con],i) => `<div class="op${i===w.pick?' pick open':''}"><button aria-expanded="${i===w.pick}"><span class="n mono">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="t mono">${i===w.pick?'Recommended':''}</span></button><div class="pc"><p><b class="mono">+ Pro</b>${pro}</p><p><b class="mono">− Con</b>${con}</p></div></div>`).join('')}</div>
+    <div class="dec-why"><div><span class="mono mute">Why I chose it</span><p>${w.why}</p></div><div><span class="mono mute">How I'd measure it</span><p>${w.measure}</p></div></div></div>`;
+  $('.opts', host).addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const op = b.parentElement, o = !op.classList.contains('open'); op.classList.toggle('open', o); b.setAttribute('aria-expanded', o); });
+};
+W.stat = host => {
+  const rows = [['Corrective','Returns, a better fabric, new guidance',5.55,1],['Informational','Facts and lab test data',5.41,0],['No response','Saying nothing',2.75,0],['Emotional','A heartfelt apology only',2.13,0]];
+  host.innerHTML = `<div class="w w-stat">${rows.map(([n,d,v,hi]) => `<div class="sr${hi?' hi':''}"><div><b>${n}</b><span class="mute">${d}</span></div><div class="bar"><i style="width:${v/7*100}%"></i></div><span class="v">${v.toFixed(2)}</span></div>`).join('')}
+    <p class="mute" style="font-size:14px">An apology on its own scored <b style="color:var(--ink)">lower than saying nothing</b>. Shoppers read it as strategic, not sincere. Product-function crisis, forgiveness out of 7.</p></div>`;
 };
 W.flip = (host, w) => {
   host.innerHTML = `<div class="w"><span class="w-label mono">Tap a card to flip</span><div class="w-flip">${w.items.map(([n,s,b]) => `<button class="flip" aria-label="${esc(n)}: ${esc(b)}"><span class="in"><span class="f"><span class="mono mute">${s}</span><b>${n}</b><span class="mono" style="color:var(--accent)">Flip ↻</span></span><span class="b">${b}</span></span></button>`).join('')}</div></div>`;
@@ -1233,6 +1371,110 @@ if (!reduce && 'IntersectionObserver' in window){
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.remove('wait'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -8% 0px'});
   $$('.rv').forEach(el => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('wait'); io.observe(el); } });
 }
+
+
+/* =========================================================
+   PERSONALITY — stickers, language switch, mind map, off the clock
+   ========================================================= */
+/* draggable stickers */
+const STICKERS = [['Fashion engineer → marketer','a',-4,'6%','55%'],['EN / 中文','b m',3,'31%','17%'],['Golf on weekends','c',-2,'39%','66%'],['Holds a patent · insurance tech','d',2,'70%','18%'],['Hangzhou → NYC → Shanghai → LA','c m',-3,'35%','77%'],['Single take, no edits','a',4,'45%','17%']];
+(function stickers(){
+  const host = $('#stickers'); if (!host) return;
+  host.innerHTML = STICKERS.map(([t,c,r,x,y]) => `<span class="stk ${c}" style="--r:${r}deg;left:${x};top:${y}" data-cursor="Drag">${t}</span>`).join('');
+  if (!matchMedia('(min-width: 861px)').matches) return;
+  $$('.stk', host).forEach(el => {
+    let sx, sy, ox, oy, on = false;
+    el.addEventListener('pointerdown', e => { on = true; el.setPointerCapture(e.pointerId); sx = e.clientX; sy = e.clientY; ox = el.offsetLeft; oy = el.offsetTop; el.style.zIndex = 9; });
+    el.addEventListener('pointermove', e => { if (!on) return; const hr = host.getBoundingClientRect();
+      const nx = Math.max(0, Math.min(hr.width - el.offsetWidth, ox + e.clientX - sx)), ny = Math.max(0, Math.min(hr.height - el.offsetHeight, oy + e.clientY - sy));
+      el.style.left = nx + 'px'; el.style.top = ny + 'px'; });
+    el.addEventListener('pointerup', () => { on = false; el.style.zIndex = ''; });
+  });
+})();
+
+/* EN / 中文 statement */
+const STATEMENT = {
+  en:{lead:'I start with the audience: what they value, and what makes them lean in or walk away. Then I turn it into', rot:['content that grows.','a launch calendar.','a brand position.','a crisis playbook.','a season\'s story.']},
+  zh:{lead:'我从受众出发：他们在意什么，什么让他们靠近，什么又让他们离开。然后，我把这些变成', rot:['会增长的内容。','一份上市日历。','一个品牌定位。','一套危机预案。','一个季度的故事。']} };
+function setLang(l){
+  const st = $('.statement'), d = STATEMENT[l];
+  st.setAttribute('lang', l === 'zh' ? 'zh' : 'en');
+  st.innerHTML = `${d.lead} <span class="rotator" id="rotator" aria-live="off">${d.rot.map((r,i) => `<span class="${i===0?'on':''}">${r}</span>`).join('')}</span>`;
+  $$('#lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.l === l));
+}
+$('#lang').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setLang(b.dataset.l); });
+
+/* radial mind map with tapered branches */
+const MIND = {
+  find:[['Spot pain points','On social media and in person, I notice what people complain about, work around, or keep asking for.','nightfly','Seen in: NightFly'],
+        ['Research what exists','Before inventing anything, I map the existing solutions and competitors.','pandora','Seen in: Pandora × Watch'],
+        ['Find the gap','I decide whether to improve what is there or adapt it to a new market.','wakaka','Seen in: Wakaka'],
+        ['Validate it','I check demand with tools like Google Trends and trend services before committing.','eighties','Seen in: \'80s forecast'],
+        ['Ask insiders','When I lack hands-on experience, I find people in the industry and ask them.','','This is why I reach out']],
+  solve:[['Research','Literature, data and market reading come first.','thesis','Seen in: my thesis'],
+        ['Brainstorm','I always put at least three options on the table.','cases','Seen in: Brand Turnarounds'],
+        ['Sketch','Mood, color and story before details.','bvpuma','Seen in: Horizontal Speed'],
+        ['Prototype','Make it real enough to judge: a line, a spec sheet, a post.','wakaka','Seen in: Wakaka'],
+        ['Test','Put it in front of real people and measure.','thesis','Seen in: 396 shoppers'],
+        ['Iterate','Change one thing, measure again, every week.','nightfly','Seen in: NightFly'],
+        ['Complete','Ship a plan someone can run.','pandora','Seen in: the Pandora launch']] };
+function drawMind(){
+  const Wd = 900, H = 560, cx = Wd/2, cy = H/2, R = 225;
+  const nodes = [];
+  MIND.find.forEach((n,i) => { const a = (150 + i*(60/(MIND.find.length-1))) * Math.PI/180; nodes.push({...arr(n), side:'find', i, a}); });
+  MIND.solve.forEach((n,i) => { const a = (-55 + i*(110/(MIND.solve.length-1))) * Math.PI/180; nodes.push({...arr(n), side:'solve', i, a}); });
+  function arr(n){ return {t:n[0], d:n[1], p:n[2], s:n[3]}; }
+  const taper = (x0,y0,x1,y1,w0,w1,bend) => {
+    const dx = x1-x0, dy = y1-y0, L = Math.hypot(dx,dy), nx = -dy/L, ny = dx/L;
+    const mx = (x0+x1)/2 + nx*bend, my = (y0+y1)/2 + ny*bend;
+    return `M${x0+nx*w0},${y0+ny*w0} Q${mx+nx*(w0+w1)/2},${my+ny*(w0+w1)/2} ${x1+nx*w1},${y1+ny*w1} L${x1-nx*w1},${y1-ny*w1} Q${mx-nx*(w0+w1)/2},${my-ny*(w0+w1)/2} ${x0-nx*w0},${y0-ny*w0} Z`;
+  };
+  let s = `<svg viewBox="0 0 ${Wd} ${H}" role="img" aria-label="Radial mind map of Murphy's process: finding problems on the left, solving them on the right">`;
+  nodes.forEach((n,k) => { const r = R + (n.side === 'solve' ? (n.i % 2 ? 30 : -10) : (n.i % 2 ? 20 : -5));
+    n.x = cx + Math.cos(n.a)*r*1.25; n.y = cy + Math.sin(n.a)*r;
+    s += `<path class="mm-branch" data-k="${k}" d="${taper(cx,cy,n.x,n.y,13,1.6,(n.side==='find'?-1:1)*(n.i%2?28:-22))}" fill="${n.side==='find' ? 'var(--ink)' : 'var(--accent)'}" opacity="${n.side==='find' ? .82 : .9}"/>`; });
+  s += `<circle cx="${cx}" cy="${cy}" r="62" fill="var(--accent)"/><text x="${cx}" y="${cy+4}" text-anchor="middle" class="mm-hub">Murphy</text><text x="${cx}" y="${cy+24}" text-anchor="middle" style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;fill:var(--accent-ink);opacity:.8">MY PROCESS</text>`;
+  s += `<text x="40" y="34" class="mm-side">← FINDING THE PROBLEM</text><text x="${Wd-40}" y="34" text-anchor="end" class="mm-side">SOLVING IT →</text>`;
+  nodes.forEach((n,k) => { const left = n.side === 'find', tx = n.x + (left ? -12 : 12);
+    s += `<g class="mm-node" data-k="${k}" tabindex="0" role="button" aria-label="${esc(n.t)}"><circle class="dot" cx="${n.x}" cy="${n.y}" r="6"/><text class="lbl" x="${tx}" y="${n.y+5}" text-anchor="${left ? 'end' : 'start'}">${n.t}</text></g>`; });
+  $('#mindMap').innerHTML = s + '</svg>';
+  const pick = k => { const n = nodes[k];
+    $$('#mindMap .mm-node').forEach(g => g.classList.toggle('on', +g.dataset.k === k));
+    $$('#mindMap .mm-branch').forEach(b => b.classList.toggle('dim', +b.dataset.k !== k));
+    $('#mindCard').innerHTML = `<span class="mono k">${n.side === 'find' ? 'Finding the problem' : 'Solving it'} · ${String(n.i+1).padStart(2,'0')}</span><h4>${n.t}</h4><p>${n.d}</p>${n.p ? `<button class="go" data-open="${n.p}">${n.s} →</button>` : `<button class="go" data-goto="contact">${n.s} →</button>`}`; };
+  $$('#mindMap .mm-node').forEach(g => { g.addEventListener('click', () => pick(+g.dataset.k)); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); pick(+g.dataset.k); } }); });
+  pick(5);
+}
+drawMind();
+$('#mindCard').addEventListener('click', e => { const o = e.target.closest('[data-open]'); if (o) return openProject(o.dataset.open); const g = e.target.closest('[data-goto]'); if (g) document.getElementById(g.dataset.goto).scrollIntoView({behavior: reduce ? 'auto' : 'smooth'}); });
+
+/* golf: tee off */
+$('#teeOff').addEventListener('click', () => {
+  const ball = $('#ocGolf .ball'), x0 = 22, y0 = 96, x1 = 268, y1 = 74, T = reduce ? 1 : 1300, t0 = performance.now();
+  const step = t => { const k = Math.min(1, (t - t0)/T), e = 1 - Math.pow(1-k, 3);
+    ball.setAttribute('cx', x0 + (x1-x0)*e); ball.setAttribute('cy', y0 + (y1-y0)*e - Math.sin(Math.PI*k)*70);
+    if (k < 1) requestAnimationFrame(step); else { $('#teeOff').textContent = 'In the hole. Again? ↺'; } };
+  requestAnimationFrame(step);
+});
+
+/* content: the 3-second hook */
+$('#hkPlay').addEventListener('click', () => {
+  const fill = $('#hkFill'), time = $('#hkTime'), msg = $('#hkMsg'), T = 3000, t0 = performance.now();
+  msg.textContent = 'Hooking…';
+  const step = t => { const k = Math.min(1, (t - t0)/T); fill.style.width = k*100 + '%'; time.textContent = (k*3).toFixed(1) + 's';
+    if (k < 1) requestAnimationFrame(step); else msg.textContent = 'Still here? Then the hook worked.'; };
+  requestAnimationFrame(step);
+});
+
+/* four cities */
+const CITIES = [['Hangzhou','Marketing & resource integration at Dayu Network: segment research, pricing and bundling, and +15% targeting efficiency.'],
+  ['New York','FIT, plus House of NightFly (+70% followers), Hanro on the shop floor, the LPGA Tour and Fabscrap.'],
+  ['Shanghai','Moose Knuckles: weekly sales dashboards and APAC-exclusive styles with the Korea team and the Canadian HQ.'],
+  ['Los Angeles','USC, M.S. in Integrated Design, Business and Technology. New in town and still finding my favorite course.']];
+let cSel = 3;
+function drawCities(){ $('#cities').innerHTML = CITIES.map(([c],i) => `<button aria-pressed="${i===cSel}" data-i="${i}">${String(i+1).padStart(2,'0')} ${c}</button>`).join(''); $('#cityNote').textContent = CITIES[cSel][1]; }
+$('#cities').addEventListener('click', e => { const b = e.target.closest('button'); if (b){ cSel = +b.dataset.i; drawCities(); } });
+drawCities();
 
 /* ---------- init ---------- */
 const start = location.hash.slice(1);
